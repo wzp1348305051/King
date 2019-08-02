@@ -1,0 +1,64 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+
+    defaultConfig {
+        applicationId rootProject.ext.proj.applicationId
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.proj.versionCode
+        versionName rootProject.ext.proj.versionName
+
+        multiDexEnabled true
+        ndk {
+            // 设置支持的SO库架构
+            abiFilters 'armeabi' //, 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
+        }
+    }
+
+    //签名配置
+    signingConfigs {
+        release {
+            storeFile file(rootProject.ext.signingConfigs.storeFile)
+            storePassword rootProject.ext.signingConfigs.storePassword
+            keyAlias rootProject.ext.signingConfigs.keyAlias
+            keyPassword rootProject.ext.signingConfigs.keyPassword
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            zipAlignEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), rootProject.ext.proguardFiles
+            signingConfig signingConfigs.release
+
+            applicationVariants.all { variant ->
+                variant.outputs.all {
+                    // apk_渠道名-版本号-版本名称-编译时间.apk
+                    def fileName = "wzp-king-${defaultConfig.versionName}-${releaseTime()}.apk"
+                    outputFileName = fileName
+                }
+            }
+        }
+        // debug下的签名配置
+        debug {
+            signingConfig signingConfigs.release
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility = rootProject.ext.java.sourceCompatibility
+        targetCompatibility = rootProject.ext.java.targetCompatibility
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation project(':common')
+}
+
+static def releaseTime() {
+    return new Date().format("MMdd_HHmm", TimeZone.getTimeZone("GMT+8"))
+}

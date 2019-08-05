@@ -56,7 +56,7 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation project(':common')
+    implementation project(':king_common')
 }
 
 static def releaseTime() {

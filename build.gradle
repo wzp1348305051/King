@@ -1,13 +1,17 @@
 apply from: 'buildsystem/dependency.gradle'
+apply plugin: 'com.alibaba.arouter'
 
 buildscript {
     repositories {
         google()
         jcenter()
+        mavenCentral()
     }
 
     dependencies {
         classpath 'com.android.tools.build:gradle:3.4.2'
+        classpath 'com.jakewharton:butterknife-gradle-plugin:10.1.0'
+        classpath "com.alibaba:arouter-register:1.0.2"
     }
 }
 
@@ -15,6 +19,7 @@ allprojects {
     repositories {
         google()
         jcenter()
+        mavenCentral()
     }
 }
 

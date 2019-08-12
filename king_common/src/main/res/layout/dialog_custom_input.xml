@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<EditText xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/height_edit"
+    android:layout_marginStart="@dimen/margin_tiny"
+    android:layout_marginEnd="@dimen/margin_tiny"
+    android:background="@drawable/edit_stroke_grey"
+    android:gravity="center_vertical"
+    android:inputType="text"
+    android:lines="1"
+    android:paddingStart="@dimen/padding_tinier"
+    android:paddingEnd="@dimen/padding_tinier"
+    android:textColor="@color/color_dark"
+    android:textColorHint="@color/color_grey"
+    android:textSize="@dimen/text_small" />

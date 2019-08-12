@@ -3,10 +3,11 @@
 
     <color name="color_black">#FF000000</color>
     <color name="color_dark">#FF333333</color>
+    <color name="color_white">#FFFFFFFF</color>
+    <color name="color_light">#FFF9F9F9</color>
     <color name="color_grey_dark">#FF666666</color>
     <color name="color_grey">#FF999999</color>
     <color name="color_grey_light">#FFCCCCCC</color>
-    <color name="color_white">#FFFFFFFF</color>
     <color name="color_red_dark">#FFAD0E11</color>
     <color name="color_red">#FFC62828</color>
     <color name="color_red_light">#FFFF5B5B</color>

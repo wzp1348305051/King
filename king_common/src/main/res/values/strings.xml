@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">common</string>
+
+    <string name="text_icon_menu">{yit_menu}</string>
+    <string name="text_icon_back">{yit_back}</string>
+    <string name="text_icon_next">{yit_next}</string>
+    <string name="text_icon_qr_code">{yit_qr_code}</string>
+    <string name="text_icon_setting">{yit_setting}</string>
+    <string name="text_icon_scan">{yit_scan}</string>
+    <string name="text_icon_delete">{yit_delete}</string>
+    <string name="text_icon_search">{yit_search}</string>
+
 </resources>

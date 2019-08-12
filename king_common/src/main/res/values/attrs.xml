@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="HeaderView">
+        <attr name="leftText" format="string" />
+        <attr name="leftTextSize" format="dimension" />
+        <attr name="leftTextColor" format="color" />
+        <attr name="middleText" format="string" />
+        <attr name="middleTextSize" format="dimension" />
+        <attr name="middleTextColor" format="color" />
+        <attr name="rightText" format="string" />
+        <attr name="rightTextSize" format="dimension" />
+        <attr name="rightTextColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="EmptyView">
+        <attr name="emptyText" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="TagTextView">
+        <attr name="tagBackground" format="reference" />
+        <attr name="tagText" format="string" />
+        <attr name="tagTextSize" format="dimension" />
+        <attr name="tagTextColor" format="color" />
+        <attr name="contextText" format="string" />
+        <attr name="contextTextSize" format="dimension" />
+        <attr name="contextTextColor" format="color" />
+    </declare-styleable>
+</resources>

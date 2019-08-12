@@ -108,7 +108,7 @@
 #---------------------------------反射类---------------------------------
 #-keep class 实体类所在包.** { *; }
 
-#Gson
+# Gson
 #如果用用到Gson解析包的，直接添加下面这几行就能成功混淆，不然会报错。
 -keepattributes Signature
 # Gson specific classes
@@ -117,7 +117,7 @@
 -keep class com.google.gson.** { *; }
 -keep class com.google.gson.stream.** { *; }
 
-#EventBus
+# EventBus
 -keepattributes *Annotation*
 -keepclassmembers class ** {
     @org.greenrobot.eventbus.Subscribe <methods>;
@@ -132,7 +132,7 @@
 # If you do not use RxJava:
 -dontwarn rx.**
 
-#butterknife
+# ButterKnife
 -keep class butterknife.** { *; }
 -dontwarn butterknife.internal.**
 -keep class **$$ViewBinder { *; }

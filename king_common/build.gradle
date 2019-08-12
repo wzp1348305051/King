@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.jakewharton.butterknife'
 
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
@@ -8,6 +9,12 @@ android {
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode rootProject.ext.proj.versionCode
         versionName rootProject.ext.proj.versionName
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
     }
 
     buildTypes {
@@ -31,4 +38,26 @@ dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
 
     api rootProject.ext.lib.androidx
+    api rootProject.ext.lib.kotlin
+    api rootProject.ext.lib.multidex
+    api rootProject.ext.lib.design
+    api rootProject.ext.lib.recyclerView
+    api rootProject.ext.lib.swipeRecyclerView
+    api rootProject.ext.lib.cardView
+    api rootProject.ext.lib.iconify
+    api rootProject.ext.lib.fragmentation
+    api rootProject.ext.lib.fragmentationSwipeBack
+    api rootProject.ext.lib.fragmentationEventBus
+    api rootProject.ext.lib.zxing
+    api rootProject.ext.lib.glide
+    api rootProject.ext.lib.butterKnife
+    api rootProject.ext.lib.eventBus
+    api rootProject.ext.lib.mmkv
+    api rootProject.ext.lib.rxJava
+    api rootProject.ext.lib.rxAndroid
+    api rootProject.ext.lib.arouter
+    api rootProject.ext.lib.logger
+
+    annotationProcessor rootProject.ext.processor.butterKnife
+    annotationProcessor rootProject.ext.processor.arouter
 }

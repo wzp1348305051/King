@@ -14,7 +14,7 @@ ext {
     ]
 
     lib = [
-            androidx              : 'androidx.appcompat:appcompat:1.0.2',
+            androidx              : 'androidx.appcompat:appcompat:1.0.0-beta01',
             kotlin                : 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.11',
             multidex              : 'androidx.multidex:multidex:2.0.0',
             recyclerView          : 'androidx.recyclerview:recyclerview:1.0.0-beta01',
@@ -39,6 +39,7 @@ ext {
             fragmentation         : 'me.yokeyword:fragmentationx:1.0.1',
             fragmentationSwipeBack: 'me.yokeyword:fragmentationx-swipeback:1.0.1',
             fragmentationEventBus : 'me.yokeyword:eventbus-activity-scope:1.1.0',
+            sunmi                 : 'com.sunmi:DS_Lib:1.0.14',
             zxing                 : 'cn.bingoogolapple:bga-qrcode-zxing:1.3.6'
     ]
 

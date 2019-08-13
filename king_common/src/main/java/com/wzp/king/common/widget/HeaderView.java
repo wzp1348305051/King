@@ -11,6 +11,7 @@ import android.widget.FrameLayout;
 import com.joanzapata.iconify.widget.IconTextView;
 import com.wzp.king.common.R;
 import com.wzp.king.common.R2;
+import com.wzp.king.common.util.DisplayUtil;
 
 import androidx.annotation.AttrRes;
 import androidx.annotation.ColorInt;
@@ -67,15 +68,16 @@ public class HeaderView extends FrameLayout {
             return;
         }
 
+        int textSize = DisplayUtil.dip2Px(context, 16f);
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.HeaderView);
         mLeftText = typedArray.getString(R.styleable.HeaderView_leftText);
-        mLeftTextSize = typedArray.getDimension(R.styleable.HeaderView_leftTextSize, 16f);
+        mLeftTextSize = typedArray.getDimensionPixelSize(R.styleable.HeaderView_leftTextSize, textSize);
         mLeftTextColor = typedArray.getColor(R.styleable.HeaderView_leftTextColor, Color.parseColor("#FF666666"));
         mMiddleText = typedArray.getString(R.styleable.HeaderView_middleText);
-        mMiddleTextSize = typedArray.getDimension(R.styleable.HeaderView_middleTextSize, 16f);
+        mMiddleTextSize = typedArray.getDimensionPixelSize(R.styleable.HeaderView_middleTextSize, textSize);
         mMiddleTextColor = typedArray.getColor(R.styleable.HeaderView_middleTextColor, Color.parseColor("#FF333333"));
         mRightText = typedArray.getString(R.styleable.HeaderView_rightText);
-        mRightTextSize = typedArray.getDimension(R.styleable.HeaderView_rightTextSize, 16f);
+        mRightTextSize = typedArray.getDimensionPixelSize(R.styleable.HeaderView_rightTextSize, textSize);
         mRightTextColor = typedArray.getColor(R.styleable.HeaderView_rightTextColor, Color.parseColor("#FF666666"));
         typedArray.recycle();
     }
@@ -88,7 +90,7 @@ public class HeaderView extends FrameLayout {
 
     private void bindContentView() {
         mTvLeft.setText(mLeftText);
-        mTvLeft.setTextSize(mLeftTextSize);
+        mTvLeft.setTextSize(TypedValue.COMPLEX_UNIT_PX, mLeftTextSize);
         mTvLeft.setTextColor(mLeftTextColor);
         mTvLeft.setOnClickListener(new SingleClickListener() {
             @Override
@@ -100,7 +102,7 @@ public class HeaderView extends FrameLayout {
             }
         });
         mTvMiddle.setText(mMiddleText);
-        mTvMiddle.setTextSize(mMiddleTextSize);
+        mTvMiddle.setTextSize(TypedValue.COMPLEX_UNIT_PX, mMiddleTextSize);
         mTvMiddle.setTextColor(mMiddleTextColor);
         mTvMiddle.setOnClickListener(new SingleClickListener() {
             @Override
@@ -112,7 +114,7 @@ public class HeaderView extends FrameLayout {
             }
         });
         mTvRight.setText(mRightText);
-        mTvRight.setTextSize(mRightTextSize);
+        mTvRight.setTextSize(TypedValue.COMPLEX_UNIT_PX, mRightTextSize);
         mTvRight.setTextColor(mRightTextColor);
         mTvRight.setOnClickListener(new SingleClickListener() {
             @Override

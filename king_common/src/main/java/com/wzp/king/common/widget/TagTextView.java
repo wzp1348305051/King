@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.wzp.king.common.R;
 import com.wzp.king.common.R2;
+import com.wzp.king.common.util.DisplayUtil;
 
 import androidx.annotation.AttrRes;
 import androidx.annotation.ColorInt;
@@ -65,10 +66,10 @@ public class TagTextView extends FrameLayout {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TagTextView);
         mTagDrawable = typedArray.getDrawable(R.styleable.TagTextView_tagBackground);
         mTagText = typedArray.getString(R.styleable.TagTextView_tagText);
-        mTagTextSize = typedArray.getDimension(R.styleable.TagTextView_tagTextSize, 12f);
+        mTagTextSize = typedArray.getDimensionPixelSize(R.styleable.TagTextView_tagTextSize, DisplayUtil.dip2Px(context, 12f));
         mTagTextColor = typedArray.getColor(R.styleable.TagTextView_tagTextColor, Color.WHITE);
         mContentText = typedArray.getString(R.styleable.TagTextView_contextText);
-        mContentTextSize = typedArray.getDimension(R.styleable.TagTextView_contextTextSize, 14f);
+        mContentTextSize = typedArray.getDimensionPixelSize(R.styleable.TagTextView_contextTextSize, DisplayUtil.dip2Px(context, 14f));
         mContentTextColor = typedArray.getColor(R.styleable.TagTextView_contextTextColor, Color.GRAY);
 
         typedArray.recycle();

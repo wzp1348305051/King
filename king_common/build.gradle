@@ -69,7 +69,7 @@ def siteUrl = 'https://github.com/wzp1348305051/King'
 //项目的git地址
 def gitUrl = 'https://github.com/wzp1348305051/King.git'
 // 发布到JCenter上的项目名字
-def libName = "king"
+def libName = "king_common"
 
 // 发布到组织名称，必须填写
 group = "com.wzp"

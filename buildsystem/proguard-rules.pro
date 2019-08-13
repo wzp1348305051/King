@@ -23,7 +23,7 @@
 -keep public class * extends android.preference.Preference
 -keep public class * extends android.view.View
 -keep public class com.android.vending.licensing.ILicensingService
--keep class android.support.** {*;}
+-keep class androidx.** {*;}
 
 -keep public class * extends android.view.View{
     *** get*();
@@ -144,7 +144,7 @@
 }
 
 # Fragmentation
--keep class * extends android.support.v4.app.FragmentManager{ *; }
+-keep class * extends androidx.fragment.app.FragmentManager{ *; }
 -keep public class * extends me.yokeyword.** { *; }
 
 # Arouter

@@ -1,5 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.jakewharton.butterknife'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
 
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
@@ -61,3 +63,114 @@ dependencies {
     annotationProcessor rootProject.ext.processor.butterKnife
     annotationProcessor rootProject.ext.processor.arouter
 }
+
+// 项目主页
+def siteUrl = 'https://github.com/wzp1348305051/King'
+//项目的git地址
+def gitUrl = 'https://github.com/wzp1348305051/King.git'
+// 发布到JCenter上的项目名字
+def libName = "king"
+
+// 发布到组织名称，必须填写
+group = "com.wzp"
+// 版本号，下次更新是只需要更改版本号即可
+version = "1.0.0"
+// 上面配置后上传至JCenter后的编译路径是这样的： compile 'com.wzp.king:library:1.0.0'
+
+// 生成源文件
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+// 生成Javadoc文档
+//task javadoc(type: Javadoc) {
+//    source = android.sourceSets.main.java.srcDirs
+//    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+//}
+
+// 文档打包成jar
+//task javadocJar(type: Jar, dependsOn: javadoc) {
+//    classifier = 'javadoc'
+//    from javadoc.destinationDir
+//}
+
+// 拷贝JavaDoc文件
+//task copyDoc(type: Copy) {
+//    from "${buildDir}/docs/"
+//    into "docs"
+//}
+
+// 上传到JCenter所需要的源码文件
+artifacts {
+//    archives javadocJar
+    archives sourcesJar
+}
+
+// 配置maven库，生成POM.xml文件
+install {
+    repositories.mavenInstaller {
+        // This generates POM.xml with proper parameters
+        pom {
+            project {
+                packaging 'aar'
+                name 'a basic android ui framework'// 项目描述
+                url siteUrl
+                licenses {
+                    license {
+                        //开源协议
+                        name 'The Apache Software License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        //开发者的个人信息
+                        id 'wengzhipeng'
+                        name 'wengzhipeng'
+                        email 'wzp1348305051@gmail.com'
+                    }
+                }
+                scm {
+                    connection gitUrl
+                    developerConnection gitUrl
+                    url siteUrl
+                }
+            }
+        }
+    }
+}
+
+//上传到JCenter
+Properties properties = new Properties()
+
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+bintray {
+    user = properties.getProperty("bintray.user")    //读取 local.properties 文件里面的 bintray.user
+    key = properties.getProperty("bintray.apikey")   //读取 local.properties 文件里面的 bintray.apikey
+    configurations = ['archives']
+    pkg {
+        // 注意：这里的repo值必须要和你创建Maven仓库的时候的名字一样
+        repo = "king"
+        // 发布到JCenter上的项目名字
+        name = libName
+        // 项目描述
+        desc = 'a basic android ui framework'
+        websiteUrl = siteUrl
+        vcsUrl = gitUrl
+        licenses = ["Apache-2.0"]
+        publish = true
+    }
+}
+
+//javadoc {
+//    options{
+//        // 如果你的项目里面有中文注释的话，必须将格式设置为UTF-8，不然会出现乱码
+//        encoding "UTF-8"
+//        charSet 'UTF-8'
+//        author true
+//        version true
+//        links "https://docs.oracle.com/javase/8/docs/api/"
+//    }
+//}

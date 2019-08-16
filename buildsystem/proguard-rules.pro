@@ -14,6 +14,7 @@
 -ignorewarning#忽略警告
 
 #---------------------------------默认保留区---------------------------------
+-keep class android.support.** {*;}
 -keep public class * extends android.app.Activity
 -keep public class * extends android.app.Application
 -keep public class * extends android.app.Service
@@ -23,7 +24,15 @@
 -keep public class * extends android.preference.Preference
 -keep public class * extends android.view.View
 -keep public class com.android.vending.licensing.ILicensingService
+
 -keep class androidx.** {*;}
+-keep interface androidx.** {*;}
+-keep public class * extends androidx.**
+-dontwarn androidx.**
+
+-keep class com.google.android.material.** {*;}
+-dontwarn com.google.android.material.**
+-dontnote com.google.android.material.**
 
 -keep public class * extends android.view.View{
     *** get*();

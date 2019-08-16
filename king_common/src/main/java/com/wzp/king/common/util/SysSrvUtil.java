@@ -7,8 +7,10 @@ import android.app.KeyguardManager;
 import android.app.NotificationManager;
 import android.app.SearchManager;
 import android.app.UiModeManager;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.hardware.SensorManager;
+import android.hardware.usb.UsbManager;
 import android.location.LocationManager;
 import android.media.AudioManager;
 import android.media.MediaRouter;
@@ -348,4 +350,44 @@ public class SysSrvUtil {
         return (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
     }
 
+    /**
+     * 获取剪切板管理器
+     *
+     * @return A android.content.ClipboardManager for accessing and modifying the contents of the
+     * global clipboard.
+     */
+    @NonNull
+    public static ClipboardManager getClipboardManager(@Nullable Context context) {
+        if (context == null) {
+            context = GlobalConstant.APP_CONTEXT;
+        }
+
+        return (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+    }
+
+    /**
+     * 获取USB管理器
+     */
+    public static UsbManager getUsbManager(@Nullable Context context) {
+        if (context == null) {
+            context = GlobalConstant.APP_CONTEXT;
+        }
+
+        return (UsbManager) context.getSystemService(Context.USB_SERVICE);
+    }
+
+    /**
+     * 获取系统服务
+     *
+     * @param name 服务名称，从Context中获取
+     * @return 具体服务，找不到则为null
+     */
+    @Nullable
+    public static Object getSystemService(@Nullable Context context, @NonNull String name) {
+        if (context == null) {
+            context = GlobalConstant.APP_CONTEXT;
+        }
+
+        return context.getSystemService(name);
+    }
 }

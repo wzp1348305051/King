@@ -9,6 +9,7 @@ import com.wzp.king.common.util.iconfont.IconFontUtil;
 
 import androidx.multidex.MultiDexApplication;
 import butterknife.ButterKnife;
+import io.reactivex.plugins.RxJavaPlugins;
 import me.yokeyword.fragmentation.Fragmentation;
 
 /**
@@ -50,6 +51,7 @@ public class AppApplication extends MultiDexApplication {
                 .handleException(L::e)
                 .install();
         IconFontUtil.init();
+        RxJavaPlugins.setErrorHandler(L::e);
     }
 
     private void initActivityLifecycle() {

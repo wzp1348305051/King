@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.wzp.king.common.R;
 import com.wzp.king.common.bean.constant.EmptyConstant;
 import com.wzp.king.common.util.EmptyUtil;
+import com.wzp.king.common.util.KeyboardUtil;
 import com.wzp.king.common.widget.SingleClickListener;
 
 import java.util.ArrayList;
@@ -103,6 +104,7 @@ public abstract class CustomDialogBuilder<T extends CustomDialogBuilder> {
                         if (listener != null) {
                             listener.onActionClick(builder);
                         }
+                        KeyboardUtil.hideKeyboard(v);
                         mDialog.dismiss();
                         mDialog = null;
                     }

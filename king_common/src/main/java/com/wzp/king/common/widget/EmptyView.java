@@ -17,7 +17,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * 带空状态的RecyclerView
+ * 带空状态视图
  *
  * @author wengzhipeng
  * @version v1.0, 2018/3/6
@@ -27,6 +27,7 @@ public class EmptyView extends FrameLayout {
     @BindView(R2.id.tv_empty_text)
     TextView mTvText;
     private String mEmptyText;
+    private View mContentView;
 
     public EmptyView(@NonNull Context context) {
         this(context, null);
@@ -69,4 +70,22 @@ public class EmptyView extends FrameLayout {
         mTvText.setText(mEmptyText);
     }
 
+    public void setContentView(@Nullable View contentView) {
+        mContentView = contentView;
+    }
+
+    @Override
+    public void setVisibility(int visibility) {
+        super.setVisibility(visibility);
+
+        if (visibility == VISIBLE) {
+            if (mContentView != null) {
+                mContentView.setVisibility(GONE);
+            }
+        } else {
+            if (mContentView != null) {
+                mContentView.setVisibility(VISIBLE);
+            }
+        }
+    }
 }

@@ -23,7 +23,7 @@
     <color name="bg_white">#FFFFFFFF</color>
     <color name="bg_light">#FFF9F9F9</color>
     <color name="bg_blue">#FFDDEFFA</color>
-    <color name="bg_pink">#FFFDECEC</color>
+    <color name="bg_pink">#FFFAF8F8</color>
     <color name="bg_yellow">#FFFCEDD5</color>
     <color name="bg_transparent">#00000000</color>
 

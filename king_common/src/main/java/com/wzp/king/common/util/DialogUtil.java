@@ -81,11 +81,11 @@ public class DialogUtil {
                 .show();
     }
 
-    public static void showInputDialog(@NonNull Context context, @Nullable String title, @Nullable String msg,
+    public static void showInputDialog(@NonNull Context context, @Nullable String title, @Nullable String hint,
                                        @Nullable CustomDialogAction.ActionClickListener<CustomDialog.InputBuilder> confirmListener) {
         new CustomDialog.InputBuilder(context)
                 .setTitle(title)
-                .setHint(msg)
+                .setHint(hint)
                 .setCancelable(false)
                 .setCanceledOnTouchOutside(false)
                 .addAction("取消", null)

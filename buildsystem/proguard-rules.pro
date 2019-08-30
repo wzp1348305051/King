@@ -153,7 +153,6 @@
 }
 
 # Fragmentation
--keep class * extends androidx.fragment.app.FragmentManager{ *; }
 -keep public class * extends me.yokeyword.** { *; }
 
 # Arouter

@@ -34,37 +34,94 @@ public class FileUtil {
     /**
      * 检测外置存储是否存在
      */
-    public static boolean isDiskAvailable() {
+    public static boolean isExtAvailable() {
         return android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED);
     }
 
+    public static boolean isFileAvailable(@Nullable String path) {
+        return isFileExists(path, false) || isDirExists(path, false);
+    }
+
+    public static boolean isExtFileAvailable(@Nullable String path) {
+        if (!isExtAvailable()) {
+            return false;
+        }
+
+        return isFileAvailable(path);
+    }
+
     /**
-     * 当前路径下文件是否存在，不存在则创建
+     * 文件是否存在
      */
-    public static boolean isFileAvailable(@NonNull String path) {
+    public static boolean isFileExists(@Nullable String path, boolean createIfNotExist) {
         if (EmptyUtil.isEmptyText(path)) {
             return false;
         }
 
-        if (isDiskAvailable()) {
-            File file = new File(path);
-            if (file.exists()) {
-                return true;
-            } else {
-                boolean dirExists = file.getParentFile().exists();
-                if (!dirExists) {
-                    dirExists = file.getParentFile().mkdirs();
-                }
-                if (dirExists) {
-                    try {
-                        return file.createNewFile();
-                    } catch (Exception e) {
-                        L.eTag(TAG, e);
-                    }
+        File file = new File(path);
+        if (file.exists()) {
+            return file.isFile();
+        }
+
+        if (createIfNotExist) {
+            boolean parentExists = file.getParentFile().exists();
+            if (!parentExists) {
+                parentExists = file.getParentFile().mkdirs();
+            }
+            if (parentExists) {
+                try {
+                    return file.createNewFile();
+                } catch (Exception e) {
+                    L.eTag(TAG, e);
                 }
             }
         }
         return false;
+    }
+
+    public static boolean isExtFileExists(@Nullable String path, boolean createIfNotExist) {
+        if (!isExtAvailable()) {
+            return false;
+        }
+
+        return isFileExists(path, createIfNotExist);
+    }
+
+    /**
+     * 文件夹是否存在
+     */
+    public static boolean isDirExists(@Nullable String path, boolean createIfNotExist) {
+        if (EmptyUtil.isEmptyText(path)) {
+            return false;
+        }
+
+        File file = new File(path);
+        if (file.exists()) {
+            return file.isDirectory();
+        }
+
+        if (createIfNotExist) {
+            boolean parentExists = file.getParentFile().exists();
+            if (!parentExists) {
+                parentExists = file.getParentFile().mkdirs();
+            }
+            if (parentExists) {
+                try {
+                    return file.mkdir();
+                } catch (Exception e) {
+                    L.eTag(TAG, e);
+                }
+            }
+        }
+        return false;
+    }
+
+    public static boolean isExtDirExists(@Nullable String path, boolean createIfNotExist) {
+        if (!isExtAvailable()) {
+            return false;
+        }
+
+        return isDirExists(path, createIfNotExist);
     }
 
     /**
@@ -155,6 +212,29 @@ public class FileUtil {
             } catch (Exception e) {
                 L.eTag(TAG, e);
             }
+        }
+    }
+
+    /**
+     * 根据路径自动删除文件或文件夹
+     */
+    public static boolean deleteFile(@Nullable String path) {
+        if (!isFileAvailable(path)) {
+            return true;
+        }
+
+        File file = new File(path);
+        if (file.isFile()) {
+            return file.delete();
+        } else {
+            File[] subFileArray = file.listFiles();
+            for (File subFile : subFileArray) {
+                if (subFile == null) {
+                    continue;
+                }
+                deleteFile(subFile.getAbsolutePath());// 删除当前目录下的子目录
+            }
+            return file.delete();// 删除当前目录
         }
     }
 }

@@ -110,21 +110,19 @@ public class BitmapUtil {
         }
 
         boolean success = false;
-        if (FileUtil.isFileAvailable(filePath)) {
-            FileOutputStream outputStream = null;
-            try {
-                outputStream = new FileOutputStream(new File(filePath));
-                success = bitmap.compress(CompressFormat.JPEG, 100, outputStream);
-            } catch (Exception e) {
-                L.eTag(TAG, e);
-            } finally {
-                if (outputStream != null) {
-                    try {
-                        outputStream.flush();
-                        outputStream.close();
-                    } catch (Exception e) {
-                        L.eTag(TAG, e);
-                    }
+        FileOutputStream outputStream = null;
+        try {
+            outputStream = new FileOutputStream(new File(filePath));
+            success = bitmap.compress(CompressFormat.JPEG, 100, outputStream);
+        } catch (Exception e) {
+            L.eTag(TAG, e);
+        } finally {
+            if (outputStream != null) {
+                try {
+                    outputStream.flush();
+                    outputStream.close();
+                } catch (Exception e) {
+                    L.eTag(TAG, e);
                 }
             }
         }

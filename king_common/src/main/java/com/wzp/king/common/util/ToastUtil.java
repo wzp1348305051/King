@@ -29,7 +29,8 @@ public class ToastUtil {
             context = GlobalConstant.APP_CONTEXT;
         }
 
-        Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
+        final Context finalContext = context;
+        ThreadPool.executeInMainThread(() -> Toast.makeText(finalContext, text, Toast.LENGTH_SHORT).show());
     }
 
 }

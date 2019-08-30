@@ -46,16 +46,12 @@ public class KeyboardUtil {
             editText.postDelayed(() -> {
                 InputMethodManager manager =
                         SysSrvUtil.getInputMethodManager(editText.getContext().getApplicationContext());
-                if (manager != null) {
-                    manager.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
-                }
+                manager.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
             }, delay);
         } else {
             InputMethodManager manager =
                     SysSrvUtil.getInputMethodManager(editText.getContext().getApplicationContext());
-            if (manager != null) {
-                manager.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
-            }
+            manager.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
         }
     }
 
@@ -81,9 +77,6 @@ public class KeyboardUtil {
         }
 
         InputMethodManager manager = SysSrvUtil.getInputMethodManager(view.getContext().getApplicationContext());
-        if (manager != null) {
-            return manager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-        }
-        return false;
+        return manager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
     }
 }

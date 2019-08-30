@@ -23,6 +23,7 @@ public class EmptyConstant {
     public static final int[] EMPTY_INT_ARRAY = new int[]{};
     public static final long EMPTY_LONG = 0L;
     public static final float EMPTY_FLOAT = 0F;
+    public static final double EMPTY_DOUBLE = 0D;
     public static final boolean EMPTY_BOOLEAN = false;
     public static final Set EMPTY_SET = Collections.EMPTY_SET;
     public static final List EMPTY_LIST = Collections.EMPTY_LIST;

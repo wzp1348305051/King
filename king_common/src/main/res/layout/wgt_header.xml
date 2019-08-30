@@ -17,21 +17,27 @@
 
         <com.joanzapata.iconify.widget.IconTextView
             android:id="@+id/tv_header_left"
-            android:layout_width="@dimen/height_header"
+            android:layout_width="wrap_content"
             android:layout_height="@dimen/height_header"
             android:layout_alignParentStart="true"
             android:gravity="center"
             android:lines="1"
+            android:minWidth="@dimen/height_header"
+            android:paddingStart="@dimen/padding_tinier"
+            android:paddingEnd="@dimen/padding_tinier"
             android:textColor="@color/color_grey_dark"
             android:textSize="@dimen/text_middle" />
 
         <com.joanzapata.iconify.widget.IconTextView
             android:id="@+id/tv_header_right"
-            android:layout_width="@dimen/height_header"
+            android:layout_width="wrap_content"
             android:layout_height="@dimen/height_header"
             android:layout_alignParentEnd="true"
             android:gravity="center"
             android:lines="1"
+            android:minWidth="@dimen/height_header"
+            android:paddingStart="@dimen/padding_tinier"
+            android:paddingEnd="@dimen/padding_tinier"
             android:textColor="@color/color_grey_dark"
             android:textSize="@dimen/text_middle" />
 

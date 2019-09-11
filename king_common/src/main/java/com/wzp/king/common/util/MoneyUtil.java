@@ -91,6 +91,14 @@ public class MoneyUtil {
         return formatMoney(yuan, PATTERN_WITH_ZERO);
     }
 
+    @NonNull
+    private static String formatMoney(double price, String pattern) {
+        price += 5.0E-5D;// 因为下面采用RoundingMode.DOWN形式，所以此处加一个相对小数，保证截取正确
+        DecimalFormat decimalFormat = new DecimalFormat(pattern);
+        decimalFormat.setRoundingMode(RoundingMode.DOWN);
+        return decimalFormat.format(price);
+    }
+
     /**
      * 将元转成分
      */
@@ -109,11 +117,4 @@ public class MoneyUtil {
         return decimalFen.divide(decimalRatio, 2, RoundingMode.CEILING).doubleValue();
     }
 
-    @NonNull
-    private static String formatMoney(double price, String pattern) {
-        DecimalFormat decimalFormat = new DecimalFormat(pattern);
-        decimalFormat.setRoundingMode(RoundingMode.DOWN);
-        return decimalFormat.format(price);
-    }
 }
-

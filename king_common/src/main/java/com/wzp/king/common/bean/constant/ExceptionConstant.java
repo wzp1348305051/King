@@ -13,6 +13,10 @@ public class ExceptionConstant {
      */
     public static final String EXCEPTION_INVALID_INIT = "INVALID INIT EXCEPTION";
     /**
+     * 非法操作异常
+     */
+    public static final String EXCEPTION_INVALID_ACTION = "INVALID ACTION EXCEPTION";
+    /**
      * 未初始化异常
      */
     public static final String EXCEPTION_NO_INIT = "NO INIT EXCEPTION";

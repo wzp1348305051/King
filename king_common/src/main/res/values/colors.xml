@@ -16,8 +16,9 @@
     <color name="color_blue_dark">#FF2196F3</color>
     <color name="color_blue">#FF03A9F4</color>
     <color name="color_blue_light">#FF99D6FA</color>
-    <color name="color_yellow">#FFC59A47</color>
-    <color name="color_yellow_light">#FFEDDEC1</color>
+    <color name="color_yellow_dark">#FFBB831B</color>
+    <color name="color_yellow">#FFC79D4C</color>
+    <color name="color_yellow_light">#FFC9B182</color>
     <color name="color_brown">#FF534326</color>
 
     <color name="bg_white">#FFFFFFFF</color>

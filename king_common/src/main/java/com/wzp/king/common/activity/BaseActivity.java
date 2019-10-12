@@ -1,5 +1,6 @@
 package com.wzp.king.common.activity;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -27,12 +28,14 @@ import butterknife.ButterKnife;
  */
 
 public abstract class BaseActivity extends AppCompatActivity implements IBaseActivity {
+    protected Activity _mActivity;
     private LoadingView mLoading;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        _mActivity = this;
         setContentView(getContentView());
         initContentView();
         initMemberData();

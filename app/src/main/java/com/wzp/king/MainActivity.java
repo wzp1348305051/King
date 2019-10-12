@@ -1,14 +1,25 @@
 package com.wzp.king;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.wzp.king.common.activity.BaseSwipeBackSupportActivity;
+
+@Route(path = "/app/main")
+public class MainActivity extends BaseSwipeBackSupportActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    public int getContentView() {
+        return R.layout.activity_main;
+    }
+
+    @Override
+    public void initMemberData() {
+
+    }
+
+    @Override
+    public void bindContentView(Bundle savedInstanceState) {
+
     }
 }

@@ -3,12 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <ImageView
+        android:id="@+id/iv_launcher_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="Welcome to main page"
-        android:textColor="@drawable/text_dark"
-        android:textSize="@dimen/text_large" />
+        android:contentDescription="@null"
+        android:src="@mipmap/ic_launcher" />
 
 </RelativeLayout>

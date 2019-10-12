@@ -1,5 +1,6 @@
 package com.wzp.king.common.activity;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -29,12 +30,14 @@ import me.yokeyword.fragmentation.anim.FragmentAnimator;
  */
 
 public abstract class BaseSupportActivity extends SupportActivity implements IBaseActivity {
+    protected Activity _mActivity;
     private LoadingView mLoading;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        _mActivity = this;
         setContentView(getContentView());
         initContentView();
         initMemberData();

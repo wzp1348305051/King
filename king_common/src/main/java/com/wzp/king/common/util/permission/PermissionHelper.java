@@ -73,6 +73,16 @@ public class PermissionHelper {
     }
 
     /**
+     * 判断Activity是否已经获取悬浮窗权限
+     *
+     * @param activity   上下文
+     * @return true or false
+     */
+    public boolean hasOverlayPermission(@NonNull Activity activity) {
+        return Settings.canDrawOverlays(activity);
+    }
+
+    /**
      * 是否应该展示权限获取提示框
      *
      * @param activity   上下文

@@ -14,11 +14,17 @@ public interface RequestConstant {
      * 权限请求
      */
     @IntRange(from = 0)
-    int REQUEST_PERMISSION = 10000;
+    int REQUEST_PERMISSION = 30000;
+
+    /**
+     * 悬浮窗请求
+     */
+    @IntRange(from = 0)
+    int REQUEST_OVERLAY = 30001;
 
     /**
      * Intent请求
      */
     @IntRange(from = 0)
-    int REQUEST_INTENT_OPEN_APP_SETTING = 20000;
+    int REQUEST_INTENT_OPEN_APP_SETTING = 30002;
 }

@@ -1,8 +1,16 @@
 package com.wzp.king.common.util.permission;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.provider.Settings;
 import android.util.SparseArray;
+
+import com.wzp.king.common.bean.constant.GlobalConstant;
+import com.wzp.king.common.bean.constant.RequestConstant;
+import com.wzp.king.common.util.DialogUtil;
+import com.wzp.king.common.widget.dialog.CustomDialog;
 
 import androidx.annotation.IntRange;
 import androidx.annotation.NonNull;
@@ -108,6 +116,21 @@ public class PermissionHelper {
     }
 
     /**
+     * 申请悬浮窗权限
+     */
+    public void requestOverlay(@NonNull Activity activity, @Nullable IPermissionCallback callback) {
+        if (callback != null) {
+            mCallbacks.put(RequestConstant.REQUEST_OVERLAY, callback);
+        }
+        DialogUtil.showMessageDialog(activity, "提示", "当前应用需要您开启悬浮窗权限", "去开启",
+                (CustomDialog.MessageBuilder messageBuilder) -> {
+            Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
+            intent.setData(Uri.parse("package:" + GlobalConstant.PACKAGE_NAME));
+            activity.startActivityForResult(intent, RequestConstant.REQUEST_OVERLAY);
+        });
+    }
+
+    /**
      * 检查权限是否被允许
      *
      * @param grantResults 权限结果列表
@@ -137,6 +160,18 @@ public class PermissionHelper {
         if (callback != null) {
             callback.onPermissionCallback(requestCode, permissions, grantResults);
             mCallbacks.remove(requestCode);
+        }
+    }
+
+    /**
+     * 悬浮窗请求回调，此方法须由Activity的onActivityResult方法调用
+     */
+    public void onRequestOverlayResult(boolean grantResult) {
+        IPermissionCallback callback = mCallbacks.get(RequestConstant.REQUEST_OVERLAY);
+        if (callback != null) {
+            callback.onPermissionCallback(RequestConstant.REQUEST_OVERLAY, new String[]{}, grantResult ?
+                    new int[]{PackageManager.PERMISSION_GRANTED} : new int[]{PackageManager.PERMISSION_DENIED});
+            mCallbacks.remove(RequestConstant.REQUEST_OVERLAY);
         }
     }
 

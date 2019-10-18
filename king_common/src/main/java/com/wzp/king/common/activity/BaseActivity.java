@@ -1,12 +1,15 @@
 package com.wzp.king.common.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
+import com.wzp.king.common.bean.constant.RequestConstant;
 import com.wzp.king.common.impl.IBaseActivity;
 import com.wzp.king.common.util.ActivityUtil;
 import com.wzp.king.common.util.KeyboardUtil;
@@ -60,6 +63,15 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         PermissionHelper.getInstance().onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == RequestConstant.REQUEST_OVERLAY) {
+            PermissionHelper.getInstance().onRequestOverlayResult(Settings.canDrawOverlays(this));
+        }
     }
 
     public void showToast(@Nullable String msg) {

@@ -73,13 +73,11 @@ public class PermissionHelper {
     }
 
     /**
-     * 判断Activity是否已经获取悬浮窗权限
-     *
-     * @param activity   上下文
+     * 判断应用是否已经获取悬浮窗权限
      * @return true or false
      */
-    public boolean hasOverlayPermission(@NonNull Activity activity) {
-        return Settings.canDrawOverlays(activity);
+    public boolean hasOverlayPermission() {
+        return Settings.canDrawOverlays(GlobalConstant.APP_CONTEXT);
     }
 
     /**

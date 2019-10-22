@@ -61,7 +61,7 @@ public class BottomSheet extends Dialog {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        initDialog();
+        initSheet();
     }
 
     @Override
@@ -98,7 +98,7 @@ public class BottomSheet extends Dialog {
         animateDown();
     }
 
-    private void initDialog() {
+    private void initSheet() {
         Window window = getWindow();
         if (window == null) {
             return;
@@ -229,7 +229,7 @@ public class BottomSheet extends Dialog {
         }
 
         @Override
-        public int getContentMaxHeight() {
+        public int getContentHeight() {
             if (EmptyUtil.isEmptyCollection(mMenuList)) {
                 return ViewGroup.LayoutParams.WRAP_CONTENT;
             }
@@ -336,7 +336,7 @@ public class BottomSheet extends Dialog {
         }
 
         @Override
-        public int getContentMaxHeight() {
+        public int getContentHeight() {
             if (EmptyUtil.isEmptyCollection(mChoiceList)) {
                 return ViewGroup.LayoutParams.WRAP_CONTENT;
             }

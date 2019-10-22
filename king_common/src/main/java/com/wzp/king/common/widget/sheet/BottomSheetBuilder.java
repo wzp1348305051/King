@@ -75,8 +75,8 @@ public abstract class BottomSheetBuilder<T extends BottomSheetBuilder, D> {
         } else {
             recyclerView.setLayoutManager(new GridLayoutManager(mContext, 4));
         }
-        if (getContentMaxHeight() != ViewGroup.LayoutParams.WRAP_CONTENT) {
-            recyclerView.getLayoutParams().height = getContentMaxHeight();
+        if (getContentHeight() != ViewGroup.LayoutParams.WRAP_CONTENT) {
+            recyclerView.getLayoutParams().height = getContentHeight();
         }
         recyclerView.setAdapter(getContentAdapter());
 
@@ -89,5 +89,5 @@ public abstract class BottomSheetBuilder<T extends BottomSheetBuilder, D> {
 
     public abstract RecyclerAdapter<D> getContentAdapter();
 
-    public abstract int getContentMaxHeight();
+    public abstract int getContentHeight();
 }

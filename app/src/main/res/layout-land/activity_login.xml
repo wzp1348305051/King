@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_white">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@null"
+        android:scaleType="centerCrop"
+        android:src="@drawable/login_bg" />
+
+    <LinearLayout
+        android:layout_width="416dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="@dimen/margin_xlarge"
+        android:background="@color/color_white"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical"
+        android:padding="@dimen/padding_small">
+
+        <TextView
+            android:id="@+id/tv_login_label"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:gravity="center"
+            android:text="@string/text_login"
+            android:textColor="@color/color_dark"
+            android:textSize="@dimen/text_middle" />
+
+        <com.wzp.king.common.widget.InputView
+            android:id="@+id/layout_login_name"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_edit"
+            android:layout_marginTop="@dimen/margin_tiny"
+            app:input_hint="@string/text_login_name_hint" />
+
+        <com.wzp.king.common.widget.InputView
+            android:id="@+id/layout_login_password"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_edit"
+            android:layout_marginTop="@dimen/margin_tiny"
+            app:input_hint="@string/text_login_password_hint"
+            app:input_icon="{yit_pwd_invisible}" />
+
+        <TextView
+            android:id="@+id/tv_login_submit"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_button"
+            android:layout_marginTop="@dimen/margin_small"
+            android:background="@drawable/btn_solid_blue"
+            android:gravity="center"
+            android:text="@string/text_login_submit"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/text_middle" />
+
+    </LinearLayout>
+
+</RelativeLayout>

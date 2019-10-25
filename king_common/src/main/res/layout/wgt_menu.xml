@@ -1,6 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.recyclerview.widget.RecyclerView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/rv_menu_content"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"/>
+    android:layout_height="wrap_content">
+
+    <com.wzp.king.common.widget.LoadImageView
+        android:id="@+id/iv_menu_icon_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="@dimen/margin_tiny"
+        android:contentDescription="@null"
+        android:visibility="gone" />
+
+    <com.joanzapata.iconify.widget.IconTextView
+        android:id="@+id/tv_menu_icon_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="@dimen/margin_tiny"
+        android:layout_marginEnd="@dimen/margin_tiny"
+        android:gravity="center"
+        android:lines="1"
+        android:textColor="@color/color_grey_dark"
+        android:textSize="@dimen/text_small"
+        android:visibility="gone"
+        tools:text="标签" />
+
+    <TextView
+        android:id="@+id/tv_menu_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_tiny"
+        android:layout_marginTop="@dimen/margin_tiny"
+        android:layout_marginEnd="@dimen/margin_tiny"
+        android:layout_toStartOf="@id/tv_menu_icon_right"
+        android:layout_toEndOf="@id/iv_menu_icon_left"
+        android:ellipsize="end"
+        android:gravity="center_vertical|start"
+        android:lines="1"
+        android:textColor="@color/color_dark"
+        android:textSize="@dimen/text_small"
+        tools:text="我是主标题" />
+
+    <TextView
+        android:id="@+id/tv_menu_subtitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_menu_title"
+        android:layout_alignStart="@id/tv_menu_title"
+        android:layout_alignEnd="@id/tv_menu_title"
+        android:layout_marginStart="@dimen/margin_tinier"
+        android:layout_marginTop="@dimen/margin_little"
+        android:ellipsize="end"
+        android:gravity="center_vertical|start"
+        android:lines="1"
+        android:textColor="@color/color_grey_dark"
+        android:textSize="@dimen/text_tiny"
+        android:visibility="gone"
+        tools:text="我是副标题" />
+
+    <View
+        style="@style/HorizontalLineStyle"
+        android:layout_below="@id/tv_menu_subtitle"
+        android:layout_alignStart="@id/tv_menu_title"
+        android:layout_marginTop="@dimen/margin_tiny" />
+
+</RelativeLayout>

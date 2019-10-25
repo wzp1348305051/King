@@ -8,13 +8,17 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
+import com.wzp.king.common.R;
 import com.wzp.king.common.bean.constant.RequestConstant;
 import com.wzp.king.common.impl.IBaseActivity;
 import com.wzp.king.common.util.ActivityUtil;
 import com.wzp.king.common.util.KeyboardUtil;
+import com.wzp.king.common.util.SysSrvUtil;
 import com.wzp.king.common.util.ToastUtil;
 import com.wzp.king.common.util.permission.PermissionHelper;
+import com.wzp.king.common.widget.HeaderView;
 import com.wzp.king.common.widget.LoadingView;
 
 import androidx.annotation.NonNull;
@@ -33,15 +37,17 @@ import me.yokeyword.fragmentation_swipeback.SwipeBackActivity;
  */
 
 public abstract class BaseSwipeBackSupportActivity extends SwipeBackActivity implements IBaseActivity {
-    protected Activity _mActivity;
-    private LoadingView mLoading;
+    protected LinearLayout mRootView;
+    protected HeaderView mHeaderView;
+    protected LoadingView mLoading;
+    protected Activity mActivity;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        _mActivity = this;
-        setContentView(getContentView());
+        mActivity = this;
+        setContentView(R.layout.activity_base);
         initContentView();
         initMemberData();
         bindContentView(savedInstanceState);
@@ -51,12 +57,22 @@ public abstract class BaseSwipeBackSupportActivity extends SwipeBackActivity imp
     protected void onPause() {
         super.onPause();
 
-        KeyboardUtil.hideKeyboard(this);
+        KeyboardUtil.hideKeyboard(mActivity);
     }
 
     @Override
     public void initContentView() {
-        ButterKnife.bind(this);
+        FrameLayout decorView = ActivityUtil.getDecorView(mActivity);
+        if (decorView != null) {
+            mRootView = decorView.findViewById(R.id.ll_base_root);
+            mHeaderView = decorView.findViewById(R.id.layout_base_header);
+            // 加载内容布局
+            if (getContentView() > 0) {
+                SysSrvUtil.getLayoutInflater(mActivity).inflate(getContentView(), mRootView, true);
+            }
+        }
+
+        ButterKnife.bind(mActivity);
     }
 
     @Override

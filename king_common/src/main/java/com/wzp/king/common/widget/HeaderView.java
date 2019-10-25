@@ -6,7 +6,7 @@ import android.graphics.Color;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
-import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 
 import com.joanzapata.iconify.widget.IconTextView;
 import com.wzp.king.common.R;
@@ -17,6 +17,7 @@ import androidx.annotation.AttrRes;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -27,25 +28,13 @@ import butterknife.ButterKnife;
  * @version v1.0, 2018/3/6
  */
 
-public class HeaderView extends FrameLayout {
+public class HeaderView extends RelativeLayout {
     @BindView(R2.id.tv_header_left)
     IconTextView mTvLeft;
     @BindView(R2.id.tv_header_middle)
     IconTextView mTvMiddle;
     @BindView(R2.id.tv_header_right)
     IconTextView mTvRight;
-    private String mLeftText;
-    private float mLeftTextSize;
-    private int mLeftTextColor;
-    private OnClickListener mOnLeftClickListener;
-    private String mMiddleText;
-    private float mMiddleTextSize;
-    private int mMiddleTextColor;
-    private OnClickListener mOnMiddleClickListener;
-    private String mRightText;
-    private float mRightTextSize;
-    private int mRightTextColor;
-    private OnClickListener mOnRightClickListener;
 
     public HeaderView(@NonNull Context context) {
         this(context, null);
@@ -58,124 +47,102 @@ public class HeaderView extends FrameLayout {
     public HeaderView(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
-        handleTypedArray(context, attrs);
         initContentView(context);
-        bindContentView();
+        bindContentView(context, attrs);
     }
 
-    private void handleTypedArray(@NonNull Context context, @Nullable AttributeSet attrs) {
+    private void initContentView(@NonNull Context context) {
+        View root = inflate(context, R.layout.wgt_header, this);
+        ButterKnife.bind(this, root);
+    }
+
+    private void bindContentView(@NonNull Context context, @Nullable AttributeSet attrs) {
         if (attrs == null) {
             return;
         }
 
         int textSize = DisplayUtil.dip2Px(context, 16f);
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.HeaderView);
-        mLeftText = typedArray.getString(R.styleable.HeaderView_leftText);
-        mLeftTextSize = typedArray.getDimensionPixelSize(R.styleable.HeaderView_leftTextSize, textSize);
-        mLeftTextColor = typedArray.getColor(R.styleable.HeaderView_leftTextColor, Color.parseColor("#FF666666"));
-        mMiddleText = typedArray.getString(R.styleable.HeaderView_middleText);
-        mMiddleTextSize = typedArray.getDimensionPixelSize(R.styleable.HeaderView_middleTextSize, textSize);
-        mMiddleTextColor = typedArray.getColor(R.styleable.HeaderView_middleTextColor, Color.parseColor("#FF333333"));
-        mRightText = typedArray.getString(R.styleable.HeaderView_rightText);
-        mRightTextSize = typedArray.getDimensionPixelSize(R.styleable.HeaderView_rightTextSize, textSize);
-        mRightTextColor = typedArray.getColor(R.styleable.HeaderView_rightTextColor, Color.parseColor("#FF666666"));
+        String leftText = typedArray.getString(R.styleable.HeaderView_header_leftText);
+        float leftSize = typedArray.getDimensionPixelSize(R.styleable.HeaderView_header_leftSize, textSize);
+        int leftColor = typedArray.getColor(R.styleable.HeaderView_header_leftColor, Color.parseColor("#FF666666"));
+        String middleText = typedArray.getString(R.styleable.HeaderView_header_middleText);
+        float middleSize = typedArray.getDimensionPixelSize(R.styleable.HeaderView_header_middleSize, textSize);
+        int middleColor = typedArray.getColor(R.styleable.HeaderView_header_middleColor, Color.parseColor("#FF333333"));
+        String rightText = typedArray.getString(R.styleable.HeaderView_header_rightText);
+        float rightSize = typedArray.getDimensionPixelSize(R.styleable.HeaderView_header_rightSize, textSize);
+        int rightColor = typedArray.getColor(R.styleable.HeaderView_header_rightColor, Color.parseColor("#FF666666"));
         typedArray.recycle();
-    }
 
-    private void initContentView(@NonNull Context context) {
-        View root = inflate(context, R.layout.wgt_header, this);
-
-        ButterKnife.bind(this, root);
-    }
-
-    private void bindContentView() {
-        mTvLeft.setText(mLeftText);
-        mTvLeft.setTextSize(TypedValue.COMPLEX_UNIT_PX, mLeftTextSize);
-        mTvLeft.setTextColor(mLeftTextColor);
-        mTvLeft.setOnClickListener(new SingleClickListener() {
-            @Override
-            public void onSingleClick(@NonNull View v) {
-                if (mOnLeftClickListener == null) {
-                    return;
-                }
-                mOnLeftClickListener.onClick(v);
-            }
-        });
-        mTvMiddle.setText(mMiddleText);
-        mTvMiddle.setTextSize(TypedValue.COMPLEX_UNIT_PX, mMiddleTextSize);
-        mTvMiddle.setTextColor(mMiddleTextColor);
-        mTvMiddle.setOnClickListener(new SingleClickListener() {
-            @Override
-            public void onSingleClick(@NonNull View v) {
-                if (mOnMiddleClickListener == null) {
-                    return;
-                }
-                mOnMiddleClickListener.onClick(v);
-            }
-        });
-        mTvRight.setText(mRightText);
-        mTvRight.setTextSize(TypedValue.COMPLEX_UNIT_PX, mRightTextSize);
-        mTvRight.setTextColor(mRightTextColor);
-        mTvRight.setOnClickListener(new SingleClickListener() {
-            @Override
-            public void onSingleClick(@NonNull View v) {
-                if (mOnRightClickListener == null) {
-                    return;
-                }
-                mOnRightClickListener.onClick(v);
-            }
-        });
-    }
-
-    public void setLeftText(@Nullable CharSequence leftText) {
         mTvLeft.setText(leftText);
-    }
-
-    public void setLeftTextSize(float leftTextSize) {
-        mTvLeft.setTextSize(TypedValue.COMPLEX_UNIT_SP, leftTextSize);
-    }
-
-    public void setLeftTextColor(@ColorInt int leftTextColor) {
-        mTvLeft.setTextColor(leftTextColor);
-    }
-
-    public void setOnLeftClickListener(@Nullable OnClickListener onLeftClickListener) {
-        mOnLeftClickListener = onLeftClickListener;
-    }
-
-    public String getMiddleText() {
-        return mTvMiddle.getText().toString();
-    }
-
-    public void setMiddleText(@Nullable CharSequence middleText) {
+        mTvLeft.setTextSize(TypedValue.COMPLEX_UNIT_PX, leftSize);
+        mTvLeft.setTextColor(leftColor);
         mTvMiddle.setText(middleText);
-    }
-
-    public void setMiddleTextSize(float middleTextSize) {
-        mTvMiddle.setTextSize(TypedValue.COMPLEX_UNIT_SP, middleTextSize);
-    }
-
-    public void setMiddleTextColor(@ColorInt int middleTextColor) {
-        mTvMiddle.setTextColor(middleTextColor);
-    }
-
-    public void setOnMiddleClickListener(@Nullable OnClickListener onMiddleClickListener) {
-        mOnMiddleClickListener = onMiddleClickListener;
-    }
-
-    public void setRightText(@Nullable CharSequence rightText) {
+        mTvMiddle.setTextSize(TypedValue.COMPLEX_UNIT_PX, middleSize);
+        mTvMiddle.setTextColor(middleColor);
         mTvRight.setText(rightText);
+        mTvRight.setTextSize(TypedValue.COMPLEX_UNIT_PX, rightSize);
+        mTvRight.setTextColor(rightColor);
     }
 
-    public void setRightTextSize(float rightTextSize) {
-        mTvRight.setTextSize(TypedValue.COMPLEX_UNIT_SP, rightTextSize);
+    public IconTextView getLeftView() {
+        return mTvLeft;
     }
 
-    public void setRightTextColor(@ColorInt int rightTextColor) {
-        mTvRight.setTextColor(rightTextColor);
+    public void setLeftText(@StringRes int resId) {
+        mTvLeft.setText(resId);
     }
 
-    public void setOnRightClickListener(@Nullable OnClickListener onRightClickListener) {
-        mOnRightClickListener = onRightClickListener;
+    public void setLeftText(@Nullable CharSequence text) {
+        mTvLeft.setText(text);
     }
+
+    public void setLeftSize(float size) {
+        mTvLeft.setTextSize(size);
+    }
+
+    public void setLeftColor(@ColorInt int color) {
+        mTvLeft.setTextColor(color);
+    }
+
+    public IconTextView getMiddleView() {
+        return mTvMiddle;
+    }
+
+    public void setMiddleText(@StringRes int resId) {
+        mTvMiddle.setText(resId);
+    }
+
+    public void setMiddleText(@Nullable CharSequence text) {
+        mTvMiddle.setText(text);
+    }
+
+    public void setMiddleSize(float size) {
+        mTvMiddle.setTextSize(size);
+    }
+
+    public void setMiddleColor(@ColorInt int color) {
+        mTvMiddle.setTextColor(color);
+    }
+
+    public IconTextView getRightView() {
+        return mTvRight;
+    }
+
+    public void setRightText(@StringRes int resId) {
+        mTvRight.setText(resId);
+    }
+
+    public void setRightText(@Nullable CharSequence text) {
+        mTvRight.setText(text);
+    }
+
+    public void setRightSize(float size) {
+        mTvRight.setTextSize(size);
+    }
+
+    public void setRightColor(@ColorInt int color) {
+        mTvRight.setTextColor(color);
+    }
+
 }

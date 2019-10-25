@@ -18,8 +18,8 @@ import androidx.annotation.Nullable;
  */
 
 public class RecyclerScrollView extends ScrollView {
-    private int slop;
-    private int touch;
+    private int mSlop;
+    private int mTouch;
 
     public RecyclerScrollView(@NonNull Context context) {
         super(context);
@@ -47,12 +47,12 @@ public class RecyclerScrollView extends ScrollView {
         try {
             switch (ev.getAction()) {
                 case MotionEvent.ACTION_DOWN:
-                    //  保存当前touch的纵坐标值
-                    touch = (int) ev.getRawY();
+                    // 保存当前touch的纵坐标值
+                    mTouch = (int) ev.getRawY();
                     break;
                 case MotionEvent.ACTION_MOVE:
-                    //  滑动距离大于slop值时，返回true
-                    if (Math.abs((int) ev.getRawY() - touch) > slop) return true;
+                    // 滑动距离大于slop值时，返回true
+                    if (Math.abs((int) ev.getRawY() - mTouch) > mSlop) return true;
                     break;
             }
             return super.onInterceptTouchEvent(ev);
@@ -76,7 +76,7 @@ public class RecyclerScrollView extends ScrollView {
      * @param context ScrollView对应的context
      */
     private void setSlop(@NonNull Context context) {
-        slop = ViewConfiguration.get(context).getScaledTouchSlop();
+        mSlop = ViewConfiguration.get(context).getScaledTouchSlop();
     }
 }
 

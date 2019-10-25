@@ -8,13 +8,17 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
+import com.wzp.king.common.R;
 import com.wzp.king.common.bean.constant.RequestConstant;
 import com.wzp.king.common.impl.IBaseActivity;
 import com.wzp.king.common.util.ActivityUtil;
 import com.wzp.king.common.util.KeyboardUtil;
+import com.wzp.king.common.util.SysSrvUtil;
 import com.wzp.king.common.util.ToastUtil;
 import com.wzp.king.common.util.permission.PermissionHelper;
+import com.wzp.king.common.widget.HeaderView;
 import com.wzp.king.common.widget.LoadingView;
 
 import androidx.annotation.NonNull;
@@ -31,15 +35,17 @@ import butterknife.ButterKnife;
  */
 
 public abstract class BaseActivity extends AppCompatActivity implements IBaseActivity {
-    protected Activity _mActivity;
-    private LoadingView mLoading;
+    protected LinearLayout mRootView;
+    protected HeaderView mHeaderView;
+    protected LoadingView mLoading;
+    protected Activity mActivity;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        _mActivity = this;
-        setContentView(getContentView());
+        mActivity = this;
+        setContentView(R.layout.activity_base);
         initContentView();
         initMemberData();
         bindContentView(savedInstanceState);
@@ -49,12 +55,22 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     protected void onPause() {
         super.onPause();
 
-        KeyboardUtil.hideKeyboard(this);
+        KeyboardUtil.hideKeyboard(mActivity);
     }
 
     @Override
     public void initContentView() {
-        ButterKnife.bind(this);
+        FrameLayout decorView = ActivityUtil.getDecorView(mActivity);
+        if (decorView != null) {
+            mRootView = decorView.findViewById(R.id.ll_base_root);
+            mHeaderView = decorView.findViewById(R.id.layout_base_header);
+            // 加载内容布局
+            if (getContentView() > 0) {
+                SysSrvUtil.getLayoutInflater(mActivity).inflate(getContentView(), mRootView, true);
+            }
+        }
+
+        ButterKnife.bind(mActivity);
     }
 
     /**
@@ -70,15 +86,15 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == RequestConstant.REQUEST_OVERLAY) {
-            PermissionHelper.getInstance().onRequestOverlayResult(Settings.canDrawOverlays(this));
+            PermissionHelper.getInstance().onRequestOverlayResult(Settings.canDrawOverlays(mActivity));
         }
     }
 
     public void showToast(@Nullable String msg) {
-        if (ActivityUtil.isActivityDied(this)) {
+        if (ActivityUtil.isActivityDied(mActivity)) {
             return;
         }
-        ToastUtil.showToast(this, msg);
+        ToastUtil.showToast(mActivity, msg);
     }
 
     public void showToast(@StringRes int resId) {
@@ -89,7 +105,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
      * 展示Loading框
      */
     public void showLoading() {
-        if (ActivityUtil.isActivityDied(this)) {
+        if (ActivityUtil.isActivityDied(mActivity)) {
             return;
         }
 
@@ -98,8 +114,8 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
         }
 
         if (mLoading == null) {
-            mLoading = new LoadingView(this);
-            FrameLayout decorView = ActivityUtil.getDecorView(this);
+            mLoading = new LoadingView(mActivity);
+            FrameLayout decorView = ActivityUtil.getDecorView(mActivity);
             FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT);
             layoutParams.gravity = Gravity.CENTER;

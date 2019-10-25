@@ -3,8 +3,9 @@ package com.wzp.king.common.widget;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.View;
-import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.wzp.king.common.R;
@@ -23,10 +24,9 @@ import butterknife.ButterKnife;
  * @version v1.0, 2018/3/6
  */
 
-public class EmptyView extends FrameLayout {
+public class EmptyView extends LinearLayout {
     @BindView(R2.id.tv_empty_text)
     TextView mTvText;
-    private String mEmptyText;
     private View mContentView;
 
     public EmptyView(@NonNull Context context) {
@@ -40,34 +40,40 @@ public class EmptyView extends FrameLayout {
     public EmptyView(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
-        handleTypedArray(context, attrs);
         initContentView(context);
-        bindContentView();
+        bindContentView(context, attrs);
     }
 
-    private void handleTypedArray(@NonNull Context context, @Nullable AttributeSet attrs) {
+    private void initContentView(@NonNull Context context) {
+        View root = inflate(context, R.layout.wgt_empty, this);
+        ButterKnife.bind(this, root);
+
+        setGravity(Gravity.CENTER);
+        setOrientation(VERTICAL);
+    }
+
+    private void bindContentView(@NonNull Context context, @Nullable AttributeSet attrs) {
         if (attrs == null) {
             return;
         }
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.EmptyView);
-        mEmptyText = typedArray.getString(R.styleable.EmptyView_emptyText);
+        String emptyText = typedArray.getString(R.styleable.EmptyView_empty_text);
         typedArray.recycle();
+
+        mTvText.setText(emptyText);
     }
 
-    private void initContentView(@NonNull Context context) {
-        View root = inflate(context, R.layout.wgt_empty, this);
-
-        ButterKnife.bind(this, root);
-    }
-
-    private void bindContentView() {
-        mTvText.setText(mEmptyText);
+    public TextView getEmptyView() {
+        return mTvText;
     }
 
     public void setEmptyText(@Nullable String emptyText) {
-        mEmptyText = emptyText;
-        mTvText.setText(mEmptyText);
+        mTvText.setText(emptyText);
+    }
+
+    public View getContentView() {
+        return mContentView;
     }
 
     public void setContentView(@Nullable View contentView) {

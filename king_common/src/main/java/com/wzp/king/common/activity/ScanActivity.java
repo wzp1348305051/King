@@ -64,6 +64,7 @@ public class ScanActivity extends BaseActivity {
 
     @Override
     public void bindContentView(Bundle savedInstanceState) {
+        mHeaderView.setVisibility(View.GONE);
         mTvBack.setOnClickListener(new SingleClickListener() {
             @Override
             public void onSingleClick(@NonNull View v) {

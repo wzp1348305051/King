@@ -1,16 +1,20 @@
 package com.wzp.king.common.fragment;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
+import com.wzp.king.common.R;
 import com.wzp.king.common.impl.IBaseFragment;
 import com.wzp.king.common.util.ActivityUtil;
 import com.wzp.king.common.util.KeyboardUtil;
 import com.wzp.king.common.util.ToastUtil;
+import com.wzp.king.common.widget.HeaderView;
 import com.wzp.king.common.widget.LoadingView;
 
 import androidx.annotation.NonNull;
@@ -27,31 +31,39 @@ import me.yokeyword.fragmentation.SupportFragment;
  * @version v1.0, 2019/6/25
  */
 public abstract class BaseSupportFragment extends SupportFragment implements IBaseFragment {
-    protected View mContentView;
-    private LoadingView mLoading;
+    protected LinearLayout mRootView;
+    protected HeaderView mHeaderView;
+    protected LoadingView mLoading;
+    protected Activity _mActivity;
     private Unbinder mUnBinder;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        mContentView = inflater.inflate(getContentView(), null);
-        initContentView(mContentView);
+        mRootView = (LinearLayout) inflater.inflate(R.layout.fragment_base, container, false);
+        initContentView(inflater);
         initMemberData();
         bindContentView();
-        return mContentView;
+        return mRootView;
     }
 
     @Override
-    public void initContentView(View view) {
-        mUnBinder = ButterKnife.bind(this, view);
+    public void initContentView(@NonNull LayoutInflater inflater) {
+        mHeaderView = mRootView.findViewById(R.id.layout_base_header);
+        // 加载内容布局
+        if (getContentView() > 0) {
+            inflater.inflate(getContentView(), mRootView, true);
+        }
+
+        mUnBinder = ButterKnife.bind(this, mRootView);
     }
 
     @Override
     public void onSupportInvisible() {
         super.onSupportInvisible();
 
-        KeyboardUtil.hideKeyboard(mContentView);
+        KeyboardUtil.hideKeyboard(mRootView);
     }
 
     @Override

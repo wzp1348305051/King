@@ -1,1 +1,1 @@
-include ':app', ':king_common'
+include ':app', ':king_common', ':king_cashier'

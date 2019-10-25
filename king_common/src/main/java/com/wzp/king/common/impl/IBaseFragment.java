@@ -1,6 +1,8 @@
 package com.wzp.king.common.impl;
 
-import android.view.View;
+import android.view.LayoutInflater;
+
+import androidx.annotation.NonNull;
 
 /**
  * 初始化Fragment View相关方法实现
@@ -19,7 +21,7 @@ public interface IBaseFragment {
     /**
      * 初始化布局元素
      */
-    void initContentView(View view);
+    void initContentView(@NonNull LayoutInflater inflater);
 
     /**
      * 初始化类成员变量

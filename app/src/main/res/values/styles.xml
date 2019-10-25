@@ -6,7 +6,7 @@
 
         <!--滑动返回透明背景转场动画-->
         <item name="android:windowAnimationStyle">@style/TranslucentAnimationStyle</item>
-        <!--<item name="android:windowAnimationStyle">@style/ActivityAnimationStyle</item>-->
+<!--        <item name="android:windowAnimationStyle">@style/ActivityAnimationStyle</item>-->
     </style>
 
     <style name="TranslucentAnimationStyle" parent="@android:style/Animation.Translucent">

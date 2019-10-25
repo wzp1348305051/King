@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">common</string>
 
     <string name="text_icon_menu">{yit_menu}</string>
     <string name="text_icon_back">{yit_back}</string>

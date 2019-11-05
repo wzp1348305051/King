@@ -16,7 +16,7 @@
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nv_main_menu"
-        android:layout_width="240dp"
+        android:layout_width="360dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:headerLayout="@layout/activity_main_menu_header"

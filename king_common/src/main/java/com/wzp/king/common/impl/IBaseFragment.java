@@ -1,5 +1,6 @@
 package com.wzp.king.common.impl;
 
+import android.os.Bundle;
 import android.view.LayoutInflater;
 
 import androidx.annotation.NonNull;
@@ -31,5 +32,5 @@ public interface IBaseFragment {
     /**
      * 绑定布局元素
      */
-    void bindContentView();
+    void bindContentView(Bundle savedInstanceState);
 }

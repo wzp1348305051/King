@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/color_green_dark"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="@dimen/padding_small">
+
+    <ImageView
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:contentDescription="@null"
+        android:scaleType="centerCrop"
+        android:src="@drawable/main_menu_logo" />
+
+    <TextView
+        android:id="@+id/tv_main_menu_header_store"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_tiny"
+        android:ellipsize="end"
+        android:lines="1"
+        android:textColor="@color/color_white"
+        android:textSize="@dimen/text_small"
+        tools:text="店铺名称" />
+
+    <TextView
+        android:id="@+id/tv_main_menu_header_account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_little"
+        android:ellipsize="end"
+        android:lines="1"
+        android:textColor="@color/color_white"
+        android:textSize="@dimen/text_middle"
+        tools:text="登录账号" />
+
+</LinearLayout>

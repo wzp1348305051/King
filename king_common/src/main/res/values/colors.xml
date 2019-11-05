@@ -19,6 +19,9 @@
     <color name="color_yellow_dark">#FFBB831B</color>
     <color name="color_yellow">#FFC79D4C</color>
     <color name="color_yellow_light">#FFC9B182</color>
+    <color name="color_green_dark">#FF57705F</color>
+    <color name="color_green">#FF7BA28C</color>
+    <color name="color_green_light">#FF91B4A5</color>
     <color name="color_brown">#FF534326</color>
 
     <color name="bg_white">#FFFFFFFF</color>

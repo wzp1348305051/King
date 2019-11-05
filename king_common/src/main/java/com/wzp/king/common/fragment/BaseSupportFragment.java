@@ -39,12 +39,18 @@ public abstract class BaseSupportFragment extends SupportFragment implements IBa
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        mRootView = (LinearLayout) inflater.inflate(R.layout.fragment_base, container, false);
-        initContentView(inflater);
-        initMemberData();
-        bindContentView();
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        if (mRootView == null) {
+            mRootView = (LinearLayout) inflater.inflate(R.layout.fragment_base, container, false);
+            initContentView(inflater);
+            initMemberData();
+            bindContentView(savedInstanceState);
+        } else {
+            ViewGroup parent = (ViewGroup) mRootView.getParent();
+            if (parent != null) {
+                parent.removeView(mRootView);
+            }
+        }
         return mRootView;
     }
 

@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">king_cashier</string>
+
+    <string name="main_menu_cashier">收银台</string>
+    <string name="main_menu_edit">商品编辑</string>
+    <string name="main_menu_report">营收统计</string>
+    <string name="main_menu_setting">设置</string>
+
 </resources>

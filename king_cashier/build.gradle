@@ -35,6 +35,10 @@ dependencies {
 
     implementation project(':king_common')
 
+    implementation rootProject.ext.lib.okhttp
+    implementation rootProject.ext.lib.retrofit
+    implementation rootProject.ext.lib.retrofitGson
+
     annotationProcessor rootProject.ext.processor.butterKnife
     annotationProcessor rootProject.ext.processor.arouter
 }

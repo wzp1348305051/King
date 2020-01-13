@@ -1,6 +1,6 @@
 package com.wzp.king;
 
-import com.wzp.king.common.AppApplication;
+import com.wzp.king.common.app.AppApplication;
 
 /**
  * 项目Application

@@ -46,6 +46,8 @@ dependencies {
     api rootProject.ext.lib.recyclerView
     api rootProject.ext.lib.swipeRecyclerView
     api rootProject.ext.lib.cardView
+    api rootProject.ext.lib.lifecycle
+    api rootProject.ext.lib.lifecycle8
     api rootProject.ext.lib.iconify
     api rootProject.ext.lib.fragmentation
     api rootProject.ext.lib.fragmentationSwipeBack
@@ -62,6 +64,8 @@ dependencies {
 
     annotationProcessor rootProject.ext.processor.butterKnife
     annotationProcessor rootProject.ext.processor.arouter
+    annotationProcessor rootProject.ext.processor.glide
+    annotationProcessor rootProject.ext.processor.lifecycle
 }
 
 // 项目主页

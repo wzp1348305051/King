@@ -60,4 +60,16 @@ public class DisplayUtil {
         return getDisplayMetrics(context).heightPixels;
     }
 
+    /**
+     * 获取状态栏高度
+     */
+    public static int getStatusBarHeight() {
+        int result = 0;
+        int resId = ResUtil.getSystemResId("status_bar_height", "dimen");
+        if (resId > 0) {
+            result = ResUtil.getDimensionPixelSize(resId);
+        }
+        return result;
+    }
+
 }

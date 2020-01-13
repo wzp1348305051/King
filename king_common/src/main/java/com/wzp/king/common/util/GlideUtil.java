@@ -2,11 +2,10 @@ package com.wzp.king.common.util;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 
-import com.bumptech.glide.BitmapTypeRequest;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.wzp.king.common.bean.constant.ExceptionConstant;
 
@@ -30,52 +29,36 @@ public class GlideUtil {
     }
 
     public static void loadImageBitmap(@NonNull ImageView imageView, @Nullable String uri, int holder, int error) {
-        if (EmptyUtil.isEmptyText(uri)) {
-            Drawable drawable = ResUtil.getDrawable(error);
-            if (drawable != null) {
-                imageView.setImageDrawable(drawable);
-            }
-            return;
-        }
-
-        BitmapTypeRequest<String> request = Glide.with(imageView.getContext()).load(uri).asBitmap();
+        RequestOptions options = new RequestOptions();
         if (ResUtil.getDrawable(holder) != null) {
-            request.placeholder(holder);
+            options.placeholder(holder);
         }
         if (ResUtil.getDrawable(error) != null) {
-            request.error(error);
+            options.error(error);
         }
-        request.dontAnimate().dontTransform().sizeMultiplier(0.8f).into(imageView);
+        Glide.with(imageView).asBitmap().load(uri).apply(options).dontAnimate().dontTransform().sizeMultiplier(0.8f).into(imageView);
     }
 
     public static void loadImageBitmap(@NonNull ImageView imageView, @DrawableRes int resId, int holder, int error) {
-        BitmapTypeRequest<Integer> request = Glide.with(imageView.getContext()).load(resId).asBitmap();
+        RequestOptions options = new RequestOptions();
         if (ResUtil.getDrawable(holder) != null) {
-            request.placeholder(holder);
+            options.placeholder(holder);
         }
         if (ResUtil.getDrawable(error) != null) {
-            request.error(error);
+            options.error(error);
         }
-        request.dontAnimate().dontTransform().sizeMultiplier(0.8f).into(imageView);
+        Glide.with(imageView).asBitmap().load(resId).apply(options).dontAnimate().dontTransform().sizeMultiplier(0.8f).into(imageView);
     }
 
     public static void loadRoundImageBitmap(@NonNull ImageView imageView, @Nullable String uri, int holder, int error) {
-        if (EmptyUtil.isEmptyText(uri)) {
-            Drawable drawable = ResUtil.getDrawable(error);
-            if (drawable != null) {
-                imageView.setImageDrawable(drawable);
-            }
-            return;
-        }
-
-        BitmapTypeRequest<String> request = Glide.with(imageView.getContext()).load(uri).asBitmap();
+        RequestOptions options = new RequestOptions();
         if (ResUtil.getDrawable(holder) != null) {
-            request.placeholder(holder);
+            options.placeholder(holder);
         }
         if (ResUtil.getDrawable(error) != null) {
-            request.error(error);
+            options.error(error);
         }
-        request.dontAnimate().dontTransform().sizeMultiplier(0.8f).into(new BitmapImageViewTarget(imageView) {
+        Glide.with(imageView).asBitmap().load(uri).apply(options).dontAnimate().dontTransform().sizeMultiplier(0.8f).into(new BitmapImageViewTarget(imageView) {
             @Override
             protected void setResource(Bitmap resource) {
                 RoundedBitmapDrawable drawable = RoundedBitmapDrawableFactory.create(imageView.getResources(),
@@ -87,14 +70,14 @@ public class GlideUtil {
     }
 
     public static void loadRoundImageBitmap(@NonNull ImageView imageView, @DrawableRes int resId, int holder, int error) {
-        BitmapTypeRequest<Integer> request = Glide.with(imageView.getContext()).load(resId).asBitmap();
+        RequestOptions options = new RequestOptions();
         if (ResUtil.getDrawable(holder) != null) {
-            request.placeholder(holder);
+            options.placeholder(holder);
         }
         if (ResUtil.getDrawable(error) != null) {
-            request.error(error);
+            options.error(error);
         }
-        request.dontAnimate().dontTransform().sizeMultiplier(0.8f).into(new BitmapImageViewTarget(imageView) {
+        Glide.with(imageView).asBitmap().load(resId).apply(options).dontAnimate().dontTransform().sizeMultiplier(0.8f).into(new BitmapImageViewTarget(imageView) {
             @Override
             protected void setResource(Bitmap resource) {
                 RoundedBitmapDrawable drawable = RoundedBitmapDrawableFactory.create(imageView.getResources(),
@@ -108,7 +91,7 @@ public class GlideUtil {
     @Nullable
     public static Bitmap getImageBitmap(@NonNull Context context, @NonNull String uri, int width, int height) {
         try {
-            return Glide.with(context).load(uri).asBitmap().into(width, height).get();
+            return Glide.with(context).asBitmap().load(uri).submit(width, height).get();
         } catch (Exception e) {
             return null;
         }

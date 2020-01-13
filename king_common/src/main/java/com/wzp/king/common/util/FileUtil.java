@@ -1,5 +1,7 @@
 package com.wzp.king.common.util;
 
+import android.os.Environment;
+
 import com.wzp.king.common.bean.constant.EmptyConstant;
 import com.wzp.king.common.bean.constant.ExceptionConstant;
 
@@ -35,7 +37,7 @@ public class FileUtil {
      * 检测外置存储是否存在
      */
     public static boolean isExtAvailable() {
-        return android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED);
+        return Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState());
     }
 
     public static boolean isFileAvailable(@Nullable String path) {

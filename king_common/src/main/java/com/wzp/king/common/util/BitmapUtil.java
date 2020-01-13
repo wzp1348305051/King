@@ -12,6 +12,7 @@ import android.util.TypedValue;
 
 import com.wzp.king.common.bean.constant.EmptyConstant;
 import com.wzp.king.common.bean.constant.ExceptionConstant;
+import com.wzp.king.common.bean.constant.GlobalConstant;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -104,6 +105,7 @@ public class BitmapUtil {
      * @param filePath 文件路径
      * @param bitmap   图片
      */
+    @SuppressWarnings("all")
     public static boolean saveBitmapToFile(@Nullable String filePath, @Nullable Bitmap bitmap) {
         if (EmptyUtil.isEmptyText(filePath) || bitmap == null) {
             return false;
@@ -112,6 +114,13 @@ public class BitmapUtil {
         boolean success = false;
         FileOutputStream outputStream = null;
         try {
+            // 若文件指定文件夹不存在，创建文件夹
+            int index = filePath.lastIndexOf(GlobalConstant.SEPARATOR_FILE);
+            if (index > 0) {
+                String dirPath = filePath.substring(0, index);
+                FileUtil.isDirExists(dirPath, true);
+            }
+
             outputStream = new FileOutputStream(new File(filePath));
             success = bitmap.compress(CompressFormat.JPEG, 100, outputStream);
         } catch (Exception e) {
@@ -130,7 +139,7 @@ public class BitmapUtil {
     }
 
     @NonNull
-    public static byte[] Bitmap2Bytes(@Nullable Bitmap bitmap) {
+    public static byte[] bitmap2Bytes(@Nullable Bitmap bitmap) {
         if (bitmap == null) {
             return EmptyConstant.EMPTY_BYTE_ARRAY;
         }
@@ -141,31 +150,11 @@ public class BitmapUtil {
     }
 
     @Nullable
-    public static Bitmap Bytes2Bimap(@Nullable byte[] bytes) {
+    public static Bitmap bytes2Bitmap(@Nullable byte[] bytes) {
         if (bytes == null || bytes.length == 0) {
             return null;
         }
         return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-    }
-
-    /**
-     * 将字符串转换成Bitmap类型
-     */
-    @Nullable
-    public static Bitmap string2Bitmap(@Nullable String string) {
-        if (EmptyUtil.isEmptyText(string)) {
-            return null;
-        }
-
-        Bitmap bitmap = null;
-        try {
-            byte[] bitmapArray;
-            bitmapArray = Base64.decode(string, Base64.DEFAULT);
-            bitmap = BitmapFactory.decodeByteArray(bitmapArray, 0, bitmapArray.length);
-        } catch (Exception e) {
-            L.eTag(TAG, e);
-        }
-        return bitmap;
     }
 
     /**
@@ -177,10 +166,26 @@ public class BitmapUtil {
             return EmptyConstant.EMPTY_STRING;
         }
 
-        ByteArrayOutputStream bStream = new ByteArrayOutputStream();
-        bitmap.compress(CompressFormat.PNG, 100, bStream);
-        byte[] bytes = bStream.toByteArray();
+        byte[] bytes = bitmap2Bytes(bitmap);
         return Base64.encodeToString(bytes, Base64.DEFAULT);
+    }
+
+    /**
+     * 将字符串转换成Bitmap类型
+     */
+    @Nullable
+    public static Bitmap string2Bitmap(@Nullable String string) {
+        if (EmptyUtil.isEmptyText(string)) {
+            return null;
+        }
+
+        try {
+            byte[] bytes = Base64.decode(string, Base64.DEFAULT);
+            return bytes2Bitmap(bytes);
+        } catch (Exception e) {
+            L.eTag(TAG, e);
+        }
+        return null;
     }
 
     /**

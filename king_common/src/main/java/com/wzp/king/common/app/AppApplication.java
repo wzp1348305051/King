@@ -1,6 +1,7 @@
-package com.wzp.king.common;
+package com.wzp.king.common.app;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.wzp.king.common.BuildConfig;
 import com.wzp.king.common.exception.ExceptionHandler;
 import com.wzp.king.common.util.ActivityLifecycleManager;
 import com.wzp.king.common.util.AppUtil;
